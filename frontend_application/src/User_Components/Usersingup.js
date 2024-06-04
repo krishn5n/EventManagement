@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/Usersignup.css'
 
-
-
-
-
 export default function Usersignup(props) {
     const [passwd, setpasswd] = useState('');
     const [uservalid, setuser] = useState('');
@@ -41,13 +37,19 @@ export default function Usersignup(props) {
             const value = await response.json();
             //Usermode thus sent from response tag. 
             if (response.status === 200) {
-                const propstosend = {
-                    usermode: value.usermode || ''
-                };
-
-                console.log(propstosend.usermode);
+                props.setusermode(value.usermode)
                 props.setjwt(value.jwt);
+                console.log('Usermode at sign up is ' + props.usermode);
                 localStorage.setItem('jwtToken', value.jwt);
+
+                const propstosend = {
+                    Clubdetails: value.Clubdetail,
+                    usermode: value.usermode
+                }
+
+                if (props.usermode === 'Club') {
+                    navigate('/Homeforclub', { state: propstosend })
+                }
                 console.log('Correct information');
                 navigate("/Homeforuser", { state: propstosend });
             }

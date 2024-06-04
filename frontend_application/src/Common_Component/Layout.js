@@ -14,9 +14,7 @@ function Layout({ children, jwt = '', setjwt = '' }, props) {
     }
 
     const gotosignout = () => {
-        localStorage.removeItem('jwtToken');
-        navigate("/")
-        setjwt('');
+        navigate('/userprofile');
     }
 
     return (
@@ -27,7 +25,8 @@ function Layout({ children, jwt = '', setjwt = '' }, props) {
                     <div className='buts'>
                         {jwt === '' && <button type="button" className="btn leftbtn btn-outline-primary" onClick={gotosignin} >Sign-in</button>}
                         {jwt === '' && <button type="button" className="btn btn-outline-primary" onClick={gotosignup} >Sign-up</button>}
-                        {jwt !== '' && <button type="button" className="btn btn-outline-primary" onClick={gotosignout} >Profile/Sign-out</button>}
+                        {jwt !== '' && <button type="button" className="btn btn-outline-primary" onClick={gotosignout} >Profile</button>}
+
                     </div>
                 </div>
             </nav>

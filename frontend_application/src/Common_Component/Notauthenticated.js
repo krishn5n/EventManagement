@@ -1,6 +1,9 @@
 import React from "react";
 
 export default function Notauthenticated(props) {
+
+    localStorage.removeItem('jwtToken');
+
     return (
         <>
             <div className="complete-div-notautenticated">

@@ -53,6 +53,20 @@ app.listen(port, () => {
 });
 
 
+function executecommand(sqlcmt) {
+    return new Promise((resolve, reject) => {
+        connection.query(sqlcmt, (err, result) => {
+            if (err) {
+                console.log('Error with sqlcmt as ' + sqlcmt);
+                reject([500, err]);
+            } else {
+                resolve([200, result]);
+            }
+        });
+    });
+}
+
+
 //Checking if data is over or it is expired
 const checkexpiry = (jwt) => {
     jwt.verify(jwt, ACCESS_TOKEN_SECRET, (err, decoded) => {
@@ -67,10 +81,10 @@ const checkexpiry = (jwt) => {
 }
 
 //Should be in AUTH.js as used to get the regno to create JWT token
-const createtoken = (uname, password, regno) => {
+const createtoken = async (uname, password, usermode, regno) => {
     if (regno) {
         let payload = {
-            'regno': regno
+            usermode
         };
         let token = jwt.sign(payload, ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
         return token;
@@ -95,7 +109,7 @@ const createtoken = (uname, password, regno) => {
 
 
 //Setting up a GET Request at made endpoint
-app.post("/login", (request, response) => {
+app.post("/login", async (request, response) => {
     let userval = request.body.Userinfo;
     let passwd = request.body.Password;
     console.log(`Obtained data thus is ${userval} and ${passwd}`)
@@ -116,7 +130,7 @@ app.post("/login", (request, response) => {
             }
             if (result.length > 0) {
                 console.log(result[0].name);
-                let token = createtoken(userval, passwd, null);
+                let token = createtoken(userval, passwd, usermode, null);
                 if (token) {
                     response.status(200).json({ usermode: 'student', jwt: token });
                 }
@@ -142,6 +156,7 @@ app.post("/login", (request, response) => {
                 return;
             }
             if (result.length > 0) {
+
                 let token = createtoken(userval, passwd, null);
                 if (token) {
                     response.status(200).json({ usermode: 'student', jwt: token });
@@ -152,18 +167,24 @@ app.post("/login", (request, response) => {
                 }
                 return;
             }
-            else {
-                console.log(userval);
-                console.log(passwd);
-                console.log("wrong info Name and password dont exist");
-                response.status(500).json({ Message: "Wrong info as name and password dont exist" });
-                return;
-            }
         })
     }
     else {
-        response.status(500).json({ Message: "Given information is wrong" });
-        return;
+
+        let sqlcmt = `Select * from clubs where Clubname='${userval}' or Clubemail='${userval}' and Clubpass='${passwd}';`;
+        try {
+            let obj = await executecommand(sqlcmt);
+            if (obj.length >= 1) {
+                response.status(200).json({ usermode: 'Club', Clubdetails: obj[0] });
+            }
+            else {
+                response.status(500).json({ Message: "Wrong info as name and password dont exist" });
+            }
+        } catch (err) {
+            response.status(500).json({ Message: err.message });
+            return;
+        }
+
     }
 })
 
@@ -254,6 +275,9 @@ app.get('/checkjwt', (req, res) => {
 
 
 
+
+
+
 //For returning the top 5 events for slideshow
 app.get('/topevents', (req, res) => {
     const sqlcmt = 'SELECT * FROM events ORDER BY Eventstart LIMIT 5;';
@@ -299,18 +323,7 @@ app.post('/deleteevent', (request, response) => {
     })
 })
 
-function executecommand(sqlcmt) {
-    return new Promise((resolve, reject) => {
-        connection.query(sqlcmt, (err, result) => {
-            if (err) {
-                console.log('Error with sqlcmt as ' + sqlcmt);
-                reject([500, err]);
-            } else {
-                resolve([200, result]);
-            }
-        });
-    });
-}
+
 
 
 app.get('/adddapuns', async (req, res) => {
@@ -396,6 +409,16 @@ app.post('/addtodelete', (request, response) => {
     });
 });
 
+app.post('/clubevents', async (req, res) => {
+    let cname = req.body.clubName;
+    let sqlcmt = `Select * from event where Clubname=${cname}`;
+    try {
+        let stats = await executecommand(sqlcmt);
+        res.status(stats[0]).json({ Result: stats[1] });
+    } catch (stats) {
+        res.status(stats[0]).json({ Result: stats[1] });
+    }
+})
 
 
 process.on('SIGINT', () => {

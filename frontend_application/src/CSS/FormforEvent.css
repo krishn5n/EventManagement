@@ -1,0 +1,79 @@
+.outside-container-clubhome {
+    height: 100vh;
+    width: 100vw;
+}
+
+.outside-event-info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.middle-input-container {
+    width: 100vw;
+    height: 60vh;
+}
+
+.event-info {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+}
+
+.enamelabel {
+    width: 100px;
+}
+
+.ename {
+    height: 40px;
+}
+
+.miniip {
+    width: 350px;
+}
+
+.holderofevent {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+}
+
+.date-time {
+    width: 150px;
+}
+
+.event-info-inside {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.image-but-club {
+    width: 133px;
+}
+
+.addition-image-slide {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 90%;
+    width: 50%;
+    height: 30%;
+    overflow-y: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.filehandler {
+    width: 100%;
+}
+
+.status-img-chosen {
+    padding-left: 5%;
+    display: inline-block;
+}

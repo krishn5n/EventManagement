@@ -5,24 +5,37 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import DeletedEvent from '../Admin_Components/DeletedEvent'
 
 export default function Homeforuser(props) {
-    const [deletedobj, setdeleted] = useState([]);
-    const location = useLocation();
-    const data = location.state;
     const navigate = useNavigate();
+    const location = useLocation();
+    const [deletedobj, setdeleted] = useState([]);
+    const data = location.state;
 
-    useEffect(() => {
-        let savedToken = localStorage.getItem('jwtToken');
-        if (!savedToken) {
-            props.setjwt('');;
+    console.log('usermode is' + data.usermode)
+
+    useEffect(async () => {
+        if (data.usermode === 'Clubs') {
             navigate("/notauthenticated");
         }
-    }, []);
+        let savedToken = localStorage.getItem('jwtToken');
+        try {
+            let response = await fetch('http://localhost:8000/')
+        }
+        catch (err) {
+            navigate("/notauthenticated");
+        }
+
+        if (!savedToken) {
+            navigate("/notauthenticated");
+        }
+    }, [])
+
 
     return (
         <div>
             <Slideshow setjwt={props.setjwt} jwt={props.jwt} />
-            {data.usermode === 'admin' && < DeletedEvent deletedobj={deletedobj} setdeleted={setdeleted} />}
-            <EventCollection deletedobj={deletedobj} setdeleted={setdeleted} usermode={data && data.usermode} setjwt={props.setjwt} jwt={props.jwt} />
+            {props.usermode === 'admin' && < DeletedEvent deletedobj={deletedobj} setdeleted={setdeleted} />}
+            <EventCollection deletedobj={deletedobj} setdeleted={setdeleted} usermode={props.usermode} setjwt={props.setjwt} jwt={props.jwt} />
         </div>
     )
+
 }
