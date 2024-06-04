@@ -1,0 +1,108 @@
+.slidecontainer {
+    display: inline-block;
+    height: 400px;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.slideshow {
+    position: relative;
+    padding-left: 60px;
+}
+
+.leftbutcont {
+    position: absolute;
+    left: 50px;
+    top: 370px;
+    width: 30px;
+    z-index: 2;
+}
+
+.leftbut {
+    width: 80px;
+}
+
+.rightbut {
+    width: 80px;
+}
+
+.rightbutcont {
+    position: absolute;
+    z-index: 2;
+    right: 40px;
+    top: 370px;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contents-slide {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 90%;
+    height: 100%;
+    overflow-y: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.imagecontents {
+    flex: 1;
+    margin: none;
+    margin-right: 13px;
+    padding: none;
+}
+
+
+.modal-imgs {
+    width: 100%;
+    height: 100%;
+
+}
+
+.infocontents {
+    flex: 1;
+}
+
+
+.clubdetailss {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 100px;
+    padding: 10px;
+    align-items: center;
+}
+
+.clubpics {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
+
+.clubimg {
+    width: 75px;
+    border-radius: 37px;
+    height: auto;
+}
+
+.eventdesctext {
+    text-align: justify;
+}

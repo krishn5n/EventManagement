@@ -1,0 +1,13 @@
+.titlename {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.leftbtn {
+    margin-right: 10px;
+}
+
+nav {
+    background-color: #e3f2fd;
+}

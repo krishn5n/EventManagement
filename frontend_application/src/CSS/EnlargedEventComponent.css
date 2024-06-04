@@ -1,0 +1,93 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 90%;
+    height: 80%;
+    overflow-y: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.imagecontent {
+    flex: 1;
+    height: 100%;
+}
+
+
+
+.modal-img {
+    width: 90%;
+    height: 100%;
+}
+
+.infocontent {
+    flex: 1;
+    padding-bottom: 20px;
+}
+
+p {
+    margin: 8px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.clubdetails {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 10%;
+    padding: 10px;
+    align-items: center;
+}
+
+.clubpic {
+    width: 75px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+
+.clubimg {
+    width: 75px;
+    border-radius: 37px;
+    height: auto;
+}
+
+.eventname {
+    height: 10%;
+}
+
+.eventdesctext {
+    text-align: justify;
+    height: 60%;
+}

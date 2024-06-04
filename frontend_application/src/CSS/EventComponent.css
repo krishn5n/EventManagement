@@ -1,0 +1,48 @@
+.outside-cont {
+    height: 350px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    padding: none;
+    margin: none;
+    border: 1px solid black;
+}
+
+
+.image-cont {
+    border: 1px solid green;
+    height: 40%;
+}
+
+.text-cont {
+    height: 60%;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+}
+
+.title-cont {
+    border: 1px solid brown;
+    height: 20%;
+    text-align: center;
+}
+
+p {
+    padding: none;
+    margin: none;
+}
+
+.desc-cont {
+    height: 50%;
+    text-align: justify;
+}
+
+.but-cont {
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
