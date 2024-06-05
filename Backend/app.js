@@ -3,8 +3,6 @@
 
  */
 
-
-
 let namecheck = /^[A-Za-z\s]+$/;
 let emailcheck = /^[A-Za-z0-9]+@(gmail|yahoo)\.(com|in|us)$/
 let dobcheck = /^(20)[0-2][4-9]-([0][1-9]|10|11|12)-([0-2][1-9]|10|20|30|31)$/
@@ -13,6 +11,10 @@ let idcheck = /^[0-9]+$/
 const SWC_USERID = 'abc';
 const SWC_PASSWORD = '123';
 
+const authrouter = require('./AuthFolder/auth.js')
+const signuprouter = require('./Newuser/Newuser.js')
+const events = require('./Events/Events.js');
+
 require('dotenv').config();
 
 const express = require('express');
@@ -20,7 +22,6 @@ const mysql = require('mysql');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const ACCESS_TOKEN_SECRET = 'fe5500c9abf10e30845a73bcc2f8a58b7f72371a7af61a77a48d3456d011aca863522b2556261e3dbdf26fe3b696c94d1166b49668978b9172170e1406218d91'
-const REFRESH_TOKEN_SECRET = 'e319cf8745a6552f62a707ba80f09c7e335a80fd0caf516bddf5b1a04666286dbf5e2a6657b8e93eb8d725c5a30548a7968049533073e68daf0bdb2d793bb60e'
 
 
 
@@ -33,7 +34,6 @@ const connection = mysql.createConnection({
 });
 
 
-//To make connection
 connection.connect((err) => {
     if (err) {
         console.log('Error connecting to MySQL database: ' + err.stack);
@@ -53,6 +53,11 @@ app.listen(port, () => {
 });
 
 
+app.use("/auth", authrouter);
+app.use("/signup", signuprouter);
+app.use("/events", events);
+
+
 function executecommand(sqlcmt) {
     return new Promise((resolve, reject) => {
         connection.query(sqlcmt, (err, result) => {
@@ -66,7 +71,7 @@ function executecommand(sqlcmt) {
     });
 }
 
-
+/*
 //Checking if data is over or it is expired
 const checkexpiry = (jwt) => {
     jwt.verify(jwt, ACCESS_TOKEN_SECRET, (err, decoded) => {
@@ -424,4 +429,4 @@ app.post('/clubevents', async (req, res) => {
 process.on('SIGINT', () => {
     connection.end();
     process.exit();
-});
+});*/

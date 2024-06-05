@@ -1,0 +1,10 @@
+authfolder
+    auth.js => A router
+        Gettoken => Gets a token after giving some data
+        Verifyauth => Verifies Authentication by taking a JWT
+    Newuser => A router
+        Users => Addition of User into DB
+        Clubs => Addition of Club into DB
+    createToken => To create tokens
+    execSQL => To execute SQL commands
+    
